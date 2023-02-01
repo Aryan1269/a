@@ -1,0 +1,59 @@
+# Name : Aryan Sarkar
+# Roll No: 20C044
+# Aim : Program on Uninformed Search
+
+from collections import deque
+
+def bfs(graph, start, goal):
+    # Create a queue to store the nodes to be visited
+    queue = deque([start])
+   
+    # Create a set to store the visited nodes
+    visited = set([start])
+    
+    while queue:
+        # Get the next node in the queue
+        node = queue.popleft()
+        print(queue)
+        # Check if the node is the goal
+        if node == goal:
+            return True
+        
+        # Get the neighbors of the current node
+        for neighbor in graph[node]:
+            # If the neighbor has not been visited, add it to the queue and mark it as visited
+            if neighbor not in visited:
+                queue.append(neighbor)
+                visited.add(neighbor)
+    
+    # Return false if the goal was not found
+    return False
+
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+print(bfs(graph, 'A', 'F')) # True
+print(bfs(graph, 'A', 'G')) # False
+
+
+# deque([])
+# deque(['C'])
+# deque(['D', 'E'])
+# deque(['E', 'F'])
+# deque(['F'])
+# deque([])
+# True
+# deque([])
+# deque(['C'])
+# deque(['D', 'E'])
+# deque(['E', 'F'])
+# deque(['F'])
+# deque([])
+# False
